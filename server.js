@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+const port =process.set.PORT || 3000;
 
 var app = express();
 app.set('view engine', 'hbs');
@@ -17,7 +18,7 @@ hbs.registerHelper('streamit',(test)=>{
 app.use(express.static(__dirname +"/public"));
 
 app.use((req,res,next)=>{
-    res.render('maintenance',{});
+    res.render('maintenance');
 });
 app.use((req,res,next)=>{
     var now = new Date().toString();
@@ -46,4 +47,6 @@ app.get('/about',(req,res)=>{
 app.get('/signup',(req,res)=>{
     res.send('bad');
 });
-app.listen(3000);
+app.listen(port,()=>{
+    console.log(`server is up on port ${port} `);
+});
