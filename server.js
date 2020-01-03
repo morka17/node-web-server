@@ -24,7 +24,7 @@ app.use((req,res,next)=>{
     var now = new Date().toString();
     var log = `${now}: ${req.method} ${req.url}`;
     console.log(log);
-    fs.appendFileSync('server.log', log + '\n',(error)=>{
+    fs.appendFileSync('server.log', log + '\n',() => {
         console.log('unable to connect');
     });
    next();
@@ -44,8 +44,10 @@ app.get('/about',(req,res)=>{
     });
 });
 
-app.get('/signup',(req,res)=>{
-    res.send('bad');
+app.get('/projects',(req,res)=>{
+    res.render('projects.hbs',{
+        pageTitle:'PROJECTS',
+    });
 });
 app.listen(port,()=>{
     console.log(`server is up on port ${port} `);
